@@ -1,17 +1,12 @@
-<?php
-
-header("Location:redirect02.php");
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Redirect Sample</title>
 </head>
 <body>
-    <h1>This is page 2</h1>
+    <h1>This is Redirect page 2 - WOOOHOOO!!!</h1>
 </body>
 </html>
