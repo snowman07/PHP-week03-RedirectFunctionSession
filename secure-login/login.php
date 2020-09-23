@@ -1,25 +1,29 @@
 <?php
-// On your own... creat a simple Bootstrap form for a usename and password and submit button
+// On your own... creat a simple Bootstrap form for a usename and password and submit button.  DONE
 
-// On your own ... please retrieve the data from the form and echo to test
+// On your own ... please retrieve the data from the form and echo to test. DONE
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     //echo "$username, $password";
 
-    if(isset($_POST['mysubmit'])) {
+    // if "if" statement is present, critically test it
+    if(isset($_POST['mysubmit'])) { // has the button been pushed
 
-        //echo "submit";
+        //echo " submit"; //this is a test to show submit word when user click submit
 
         if(($username == "phil") && ($password =="web123")) {
-            echo "Welcome";
+            $msg = "Welcome";
         }
+
+
+
     } else {
         if ($username != "" && $password != "") {
 
         } else {
-            $msg = "Please enter type username and password";
+            $msg = "Please enter username and password";
         }
 
     }
@@ -79,10 +83,15 @@
           Submit
         </button>
 
+
+        <p>&nbsp;</p>
         <div>
             <?php
             
-            echo $msg;
+            if($msg) {
+              echo "\n<div class=\"alert alert-primary\">$msg</div>";
+            }
+            
             ?>
         </div>
 
