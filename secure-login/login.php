@@ -1,12 +1,13 @@
 <?php
 
 include("/home/adomingo4/data/login-data.php"); // directory for htaccess. /home/adomingo4 - is the root folder "/"
+// this is for increased security
 // On your own... creat a simple Bootstrap form for a usename and password and submit button.  DONE
 
 // On your own ... please retrieve the data from the form and echo to test. DONE
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']); // trim remove spaces before or after the text tring
+    $password = trim($_POST['password']);
 
     //echo "$username, $password";
 
@@ -22,7 +23,7 @@ include("/home/adomingo4/data/login-data.php"); // directory for htaccess. /home
 
           //$msg = "Welcome";   // just for testing
           session_start();
-          $_SESSION['aasdffrtgfb']; // make as random as possible
+          $_SESSION['aasdffrtgfb'] = session_id(); // make as random as possible
 
           header("Location: welcome.php");  //remember to disable this if you are debugging!
 

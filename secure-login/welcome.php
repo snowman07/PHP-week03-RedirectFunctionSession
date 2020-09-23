@@ -1,4 +1,4 @@
-
+// this is a secured page
 <?php
     session_start();
 
