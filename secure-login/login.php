@@ -1,4 +1,6 @@
 <?php
+
+include("/home/adomingo4/data/login-data.php"); // directory for htaccess. /home/adomingo4 - is the root folder "/"
 // On your own... creat a simple Bootstrap form for a usename and password and submit button.  DONE
 
 // On your own ... please retrieve the data from the form and echo to test. DONE
@@ -13,8 +15,19 @@
 
         //echo " submit"; //this is a test to show submit word when user click submit
 
-        if(($username == "phil") && ($password =="web123")) {
-            $msg = "Welcome";
+        //if(($username == "phil") && ($password =="web123")) {     // <--- from here
+        if(($username == $username_good) && (password_verify($password, $pw_enc))) {     // <-- to here  
+
+          //SUCCESS
+
+          //$msg = "Welcome";   // just for testing
+          session_start();
+          $_SESSION['aasdffrtgfb']; // make as random as possible
+
+          header("Location: welcome.php");  //remember to disable this if you are debugging!
+
+        } else {
+          $msg = "Incorrect Login";
         }
 
 
