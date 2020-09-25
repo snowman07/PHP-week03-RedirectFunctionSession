@@ -20,8 +20,8 @@
     
     */
 
-    $handle = fopen("datafile.txt", "w"); // open the file for writing // this is a "resource" object but it looks variable in php
-    fwrite($handle, "New text string here"); //$handle is a "resource" object
+    $handle = fopen("datafile.txt", "a"); // open the file for appending
+    fwrite($handle, "Another new text string here"); //$handle is a "resource" object
     fclose($handle);
 
     

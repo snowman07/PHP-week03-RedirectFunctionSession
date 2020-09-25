@@ -12,7 +12,7 @@
     if($handle) {
 
         while(!feof($handle)) {
-            $buffer = fgets($handle, 4096); // this is a single line from the text file
+            $buffer = fgets($handle, 4096); // this is a single line from the text file //4096 kilobytes of information
             $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
 
         } // end loop
