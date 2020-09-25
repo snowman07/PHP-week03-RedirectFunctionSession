@@ -34,6 +34,8 @@
         $title = trim($_POST['title']);
         $entry = trim($_POST['entry']);
 
+        $today = date("F j, Y, g:i a"); //grabbed from PHP manual
+
         //echo "$title $entry";  // for testing
 
         if(isset($_POST['mysubmit'])) { //has the user pressed the button
@@ -51,14 +53,23 @@
 
               } // end loop
 
-              echo $existingText;
+              //echo $existingText;
               fclose($handle);
           }
 
           // previous blog entries are now in $existingText
 
           // Lets create a new var from the new blog entry
-          $newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt
+          
+          //$newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt  // think this is the reason why it is showing the break
+
+          $newEntry = "\n<div class=\"new-entry\">";
+          $newEntry .= "\n\t<div class=\"title\">$title</div>";
+          $newEntry .= "\n\t<div class=\"timedate\">$today</div>";
+          $newEntry .= "\n\t<div class=\"entry\">$entry</div>";
+
+
+          $newEntry .= "\n</div>";
 
           $allEntries = $newEntry . $existingText;
 
@@ -74,7 +85,7 @@
       
       ?>
 
-
+      <div><a href="../index.php">Homepage</a></div>
 
       <form name="myform" method="post" action="insert.php">
         <div class="form-group">

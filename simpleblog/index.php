@@ -8,12 +8,36 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    <style type="text/css">
+        .new-entry {
+            border: 1px solid #999;
+            margin: 10px;
+        }
+        .title {
+            font-weight: bold;
+        }
+        .timedate {
+            font-style: italic;
+
+        }
+        .entry {
+
+        }
+    </style>
+
     <title>Simple Blog</title>
   </head>
   <body>
     
     <div class="container">
         <h1>Simple Blog</h1>
+
+        <div><a href="admin/insert.php">Insert New Entry</a></div>
+
+        <?php
+        include("admin/blogfile.txt");
+        
+        ?>
     
     
     
