@@ -36,44 +36,41 @@
 
         //echo "$title $entry";  // for testing
 
-        if(isset($_POST['mysubmit'])) {
+        if(isset($_POST['mysubmit'])) { //has the user pressed the button
 
-            // if(($title != "") && ($entry != "")) { // has the user pressed the button
-            //     $msg = "New blog entry has been added!";
-            // } else {
-            //     $msg = "Please fill out the form";
-            // }
+          // if(($title != "") && ($entry != "")) { // has the user pressed the button
+          //     $msg = "New blog entry has been added!";
+
+          // WRITE TO BLOG
+          $handle = fopen("blogfile.txt", "r");
+          if($handle) {
+
+              while(!feof($handle)) {
+                $buffer = fgets($handle, 4096); // this is a single line from the text file
+                $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
+
+              } // end loop
+
+              echo $existingText;
+              fclose($handle);
+          }
+
+          // previous blog entries are now in $existingText
+
+          // Lets create a new var from the new blog entry
+          $newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt
+
+          $allEntries = $newEntry . $existingText;
+
+          //write to the blogfile
+          $handle = fopen("blogfile.txt", "w");   //use to be blogfile.txt
+          fwrite($handle, $allEntries);
+          fclose($handle);  // END WRITE TO BLOG
+
+          // } else {
+          //     $msg = "Please fill out the form";
+          // }
         }
-
-
-
-
-
-
-        // WRITE TO BLOG
-        $handle = fopen("datafile.txt", "r");
-            if($handle) {
-
-                while(!feof($handle)) {
-                    $buffer = fgets($handle, 4096); // this is a single line from the text file
-                    $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
-
-                } // end loop
-
-                echo $existingText;
-                fclose($handle);
-            }
-
-        // previous blog entries are now in $existingText
-
-        // Lets create a new var from the new blog entry
-        $newEntry = $title. "<br>" . $entry . "<br>";
-
-        $allEntries = $newEntry . $existingFile;
-
-        $handle = fopen("blogfile.txt", "w"); 
-        fwrite($handle, $allEntries);
-        fclose($handle);
       
       ?>
 
@@ -91,16 +88,10 @@
         </div>
         
         
-        
-        
         <div class="form-group">
           <label for="entry">Entry</label>
-          <input
-            type="text"
-            class="form-control"
-            name="entry"
-            placeholder="Enter entry here"
-          />
+          </br>
+          <textarea name="entry" class="form-control"></textarea>
         </div>
 
         <button type="submit" name="mysubmit" class="btn btn-primary mb-2">
@@ -109,18 +100,24 @@
 
         <!-- <p>$nbsp;</p> -->
 
-        <?php
+        <!-- ?php 
         
             echo $msg;
-        ?>
+        ?> -->
 
       </form>
+
+      <!-- ?php 
+        
+            echo $msg;
+        ?> -->
+
     </div>
     <!--end of container class-->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
+    <!-- <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"
@@ -134,6 +131,6 @@
       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
   </body>
 </html>
