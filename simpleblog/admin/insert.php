@@ -83,7 +83,7 @@
 
             $newEntry .= "\n</div>";
 
-            $allEntries = $newEntry . $existingText;
+            $allEntries = $newEntry . $existingText; // this will show all blogs
 
             //write to the blogfile
             $handle = fopen("blogfile.txt", "w");   //use to be blogfile.txt
