@@ -1,3 +1,11 @@
+
+<?php
+
+  include("includes/header.php");
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,17 +38,14 @@
   <body>
     
     <div class="container">
-        <h1>Simple Blog</h1>
+      <!-- <h1>Simple Blog</h1> -->
 
-        <div><a href="admin/insert.php">Insert New Entry</a></div>
+      <div><a href="admin/insert.php">Insert New Entry</a></div>
 
-        <?php
-        include("admin/blogfile.txt");
-        
-        ?>
-    
-    
-    
+      <?php
+      include("admin/blogfile.txt");
+      
+      ?>
     </div>
 
     <!-- Optional JavaScript -->
