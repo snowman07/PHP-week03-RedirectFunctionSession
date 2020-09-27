@@ -40,7 +40,7 @@
     <div class="container">
       <!-- <h1>Simple Blog</h1> -->
 
-      <div><a href="admin/insert.php">Insert New Entry</a></div>
+      <div><a href="admin/login.php">Insert New Entry</a></div>
 
       <?php
       include("admin/blogfile.txt");

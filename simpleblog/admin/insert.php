@@ -1,3 +1,22 @@
+
+<!-- this is a secured page -->
+<?php
+    session_start();
+
+    //echo session_id();
+
+    //if(!isset($_SESSION['aasdffrtgfb'])) {        //<-- from here     isset means something is set
+    if(isset($_SESSION['aasdffrtgfbqw'])) {                //<-- to here
+        //header("Location: login.php");
+        //echo "Logged in";
+    } else {
+        //echo "NOT logged in";
+        header("Location: login.php");
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,57 +49,53 @@
 
       <?php
         // retrieve the form data
-
-        $title = trim($_POST['title']);
-        $entry = trim($_POST['entry']);
-
-        $today = date("F j, Y, g:i a"); //grabbed from PHP manual
-
-        //echo "$title $entry";  // for testing
-
         if(isset($_POST['mysubmit'])) { //has the user pressed the button
 
-          // if(($title != "") && ($entry != "")) { // has the user pressed the button
-          //     $msg = "New blog entry has been added!";
+          $title = trim($_POST['title']);
+          $entry = trim($_POST['entry']);
+          $today = date("F j, Y, g:i a"); //grabbed from PHP manual
+          $handle = fopen("blogfile.txt", "r"); // flatfile
 
           // WRITE TO BLOG
-          $handle = fopen("blogfile.txt", "r");
-          if($handle) {
+          if(($handle) && ($title != "") && ($entry != "")) {
 
-              while(!feof($handle)) {
-                $buffer = fgets($handle, 4096); // this is a single line from the text file
-                $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
+            while(!feof($handle)) {
+              $buffer = fgets($handle, 4096); // this is a single line from the text file
+              $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
 
-              } // end loop
+            } // end loop
 
-              //echo $existingText;
-              fclose($handle);
-          }
-
-          // previous blog entries are now in $existingText
-
-          // Lets create a new var from the new blog entry
+            //echo $existingText;
+            fclose($handle);
           
-          //$newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt  // think this is the reason why it is showing the break
 
-          $newEntry = "\n<div class=\"new-entry\">";
-          $newEntry .= "\n\t<div class=\"title\">$title</div>";
-          $newEntry .= "\n\t<div class=\"timedate\">$today</div>";
-          $newEntry .= "\n\t<div class=\"entry\">$entry</div>";
+            // previous blog entries are now in $existingText
+
+            // Lets create a new var from the new blog entry
+            
+            //$newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt  // think this is the reason why it is showing the break
+
+            $newEntry = "\n<div class=\"new-entry\">";
+            $newEntry .= "\n\t<div class=\"title\">$title</div>";
+            $newEntry .= "\n\t<div class=\"timedate\">$today</div>";
+            $newEntry .= "\n\t<div class=\"entry\">$entry</div>";
 
 
-          $newEntry .= "\n</div>";
+            $newEntry .= "\n</div>";
 
-          $allEntries = $newEntry . $existingText;
+            $allEntries = $newEntry . $existingText;
 
-          //write to the blogfile
-          $handle = fopen("blogfile.txt", "w");   //use to be blogfile.txt
-          fwrite($handle, $allEntries);
-          fclose($handle);  // END WRITE TO BLOG
+            //write to the blogfile
+            $handle = fopen("blogfile.txt", "w");   //use to be blogfile.txt
+            fwrite($handle, $allEntries);
+            fclose($handle);  
+            // END WRITE TO BLOG
 
-          // } else {
-          //     $msg = "Please fill out the form";
-          // }
+            $msg = "New blog entry added!!"; // echo of $msg is found below
+
+          } else {
+              $msg = "Please fill out the form"; // echo of $msg is found below
+          }
         }
       
       ?>
@@ -109,19 +124,19 @@
           Submit
         </button>
 
-        <!-- <p>$nbsp;</p> -->
+        <p>&nbsp;</p>
 
-        <!-- ?php 
-        
-            echo $msg;
-        ?> -->
+        <div>
+            <?php
+            
+            if($msg) {
+              echo "\n<div class=\"alert alert-primary\">$msg</div>";
+            }
+            
+            ?>
+        </div>
 
       </form>
-
-      <!-- ?php 
-        
-            echo $msg;
-        ?> -->
 
     </div>
     <!--end of container class-->
