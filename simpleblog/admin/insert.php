@@ -1,6 +1,3 @@
-<?php
-  include("../includes/header.php");
-?>
 <!-- this is a secured page -->
 <?php
   session_start();
@@ -15,6 +12,9 @@
       //echo "NOT logged in";
       header("Location: login.php");
   }
+?>
+<?php
+  include("../includes/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -111,11 +111,16 @@
             }
           }
 
-        ?>
+        ?> 
+        <!-- End of form condition-->
 
-        
-
-
+        <div><a href="../index.php">Homepage</a></div>
+        <!-- for logout.php -->
+        <div>
+          <a href="logout.php">Logout</a>
+          
+        </div>
+        <!-- for logout.php -->
 
         <p>&nbsp;</p>
 
@@ -154,17 +159,6 @@
           </div>
 
         </form>
-
-        <div><a href="../index.php">Homepage</a></div>
-        <!-- for logout.php -->
-        <div>
-          <a href="login.php">Logout</a>
-          <?php
-            include("logout.php");
-          ?>  
-        </div>
-        <!-- for logout.php -->
-
       </div>
     </div>
     <?php
