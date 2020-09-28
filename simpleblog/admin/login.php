@@ -25,11 +25,11 @@
 
         //SUCCESS
 
-        //$msg = "Welcome";   // just for testing
+        //$msg = "Welcome";   // just for testing 
         session_start();
         $_SESSION['aasdffrtgfbqw'] = session_id(); // make as random as possible
 
-        header("Location: insert.php");  //remember to disable this if you are debugging!
+        header("Location: insert.php");  //remember to disable this if you are debugging!!
 
       } else {
         $msg = "Incorrect Login";
