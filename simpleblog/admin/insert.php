@@ -1,21 +1,21 @@
-
+<?php
+  include("../includes/header.php");
+?>
 <!-- this is a secured page -->
 <?php
-    session_start();
+  session_start();
 
-    //echo session_id();
+  //echo session_id();
 
-    //if(!isset($_SESSION['aasdffrtgfb'])) {        //<-- from here     isset means something is set
-    if(isset($_SESSION['aasdffrtgfbqw'])) {                //<-- to here
-        //header("Location: login.php");
-        //echo "Logged in";
-    } else {
-        //echo "NOT logged in";
-        header("Location: login.php");
-    }
-
+  //if(!isset($_SESSION['aasdffrtgfb'])) {        //<-- from here     isset means something is set
+  if(isset($_SESSION['aasdffrtgfbqw'])) {                //<-- to here
+      //header("Location: login.php");
+      //echo "Logged in";
+  } else {
+      //echo "NOT logged in";
+      header("Location: login.php");
+  }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,105 +40,136 @@
       form {
         max-width: 450px;
       }
+      .border {
+        margin: 20px 250px 10px 250px;
+        /* border: 10px solid red; */
+      }
+      .container {
+        padding: 30px;
+        margin: 0 200px 0 200px;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 60px;
+        color: blue;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>New Blog Entry</h1>
+    <h2>NEW BLOG ENTRY</h2>
+    <div class="border border-primary rounded">
+      <div class="container">
+        
+        <?php
+          // retrieve the form data
+          if(isset($_POST['mysubmit'])) { //has the user pressed the button
 
+            $title = trim($_POST['title']);
+            $entry = trim($_POST['entry']);
+            $today = date("F j, Y, g:i a"); //grabbed from PHP manual
+            $handle = fopen("blogfile.txt", "r"); // flatfile
 
-      <?php
-        // retrieve the form data
-        if(isset($_POST['mysubmit'])) { //has the user pressed the button
+            // WRITE TO BLOG
+            if(($handle) && ($title != "") && ($entry != "")) {
 
-          $title = trim($_POST['title']);
-          $entry = trim($_POST['entry']);
-          $today = date("F j, Y, g:i a"); //grabbed from PHP manual
-          $handle = fopen("blogfile.txt", "r"); // flatfile
+              while(!feof($handle)) {
+                $buffer = fgets($handle, 4096); // this is a single line from the text file
+                $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
 
-          // WRITE TO BLOG
-          if(($handle) && ($title != "") && ($entry != "")) {
+              } // end loop
 
-            while(!feof($handle)) {
-              $buffer = fgets($handle, 4096); // this is a single line from the text file
-              $existingText .= $buffer; //append the variable; this then is ALL lines from the text file
-
-            } // end loop
-
-            //echo $existingText;
-            fclose($handle);
-          
-
-            // previous blog entries are now in $existingText
-
-            // Lets create a new var from the new blog entry
+              //echo $existingText;
+              fclose($handle);
             
-            //$newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt  // think this is the reason why it is showing the break
 
-            $newEntry = "\n<div class=\"new-entry\">";
-            $newEntry .= "\n\t<div class=\"title\">$title</div>";
-            $newEntry .= "\n\t<div class=\"timedate\">$today</div>";
-            $newEntry .= "\n\t<div class=\"entry\">$entry</div>";
+              // previous blog entries are now in $existingText
+
+              // Lets create a new var from the new blog entry
+              
+              //$newEntry = $title . "\<br\>" . $entry . "\<br\>"; ////the result of this is in blogfile.txt  // think this is the reason why it is showing the break
+
+              $newEntry = "\n<div class=\"new-entry\">";
+              $newEntry .= "\n\t<div class=\"title\">$title</div>";
+              $newEntry .= "\n\t<div class=\"timedate\">$today</div>";
+              $newEntry .= "\n\t<div class=\"entry\">$entry</div>";
 
 
-            $newEntry .= "\n</div>";
+              $newEntry .= "\n</div>";
 
-            $allEntries = $newEntry . $existingText; // this will show all blogs
+              $allEntries = $newEntry . $existingText; // this will show all blogs
 
-            //write to the blogfile
-            $handle = fopen("blogfile.txt", "w");   //use to be blogfile.txt
-            fwrite($handle, $allEntries);
-            fclose($handle);  
-            // END WRITE TO BLOG
+              //write to the blogfile
+              $handle = fopen("blogfile.txt", "w");   //use to be blogfile.txt
+              fwrite($handle, $allEntries);
+              fclose($handle);  
+              // END WRITE TO BLOG
 
-            $msg = "New blog entry added!!"; // echo of $msg is found below
+              $msg = "New blog entry added!!"; // echo of $msg is found below
 
-          } else {
-              $msg = "Please fill out the form"; // echo of $msg is found below
+            } else {
+                $msg = "Please fill out the form"; // echo of $msg is found below
+            }
           }
-        }
-      
-      ?>
 
-      <div><a href="../index.php">Homepage</a></div>
+        ?>
 
-      <form name="myform" method="post" action="insert.php">
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            name="title"
-            placeholder="Enter title here"
-          />
-        </div>
         
-        
-        <div class="form-group">
-          <label for="entry">Entry</label>
-          </br>
-          <textarea name="entry" class="form-control"></textarea>
-        </div>
 
-        <button type="submit" name="mysubmit" class="btn btn-primary mb-2">
-          Submit
-        </button>
+
 
         <p>&nbsp;</p>
 
+        <form name="myform" method="post" action="insert.php">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              placeholder="Enter title here"
+            />
+          </div>
+          
+          
+          <div class="form-group">
+            <label for="entry">Entry</label>
+            </br>
+            <textarea name="entry" class="form-control"></textarea>
+          </div>
+
+          <button type="submit" name="mysubmit" class="btn btn-primary mb-2">
+            Submit
+          </button>
+
+          <p>&nbsp;</p>
+
+          <div>
+              <?php
+              
+              if($msg) {
+                echo "\n<div class=\"alert alert-primary\">$msg</div>";
+              }
+              
+              ?>
+          </div>
+
+        </form>
+
+        <div><a href="../index.php">Homepage</a></div>
+        <!-- for logout.php -->
         <div>
-            <?php
-            
-            if($msg) {
-              echo "\n<div class=\"alert alert-primary\">$msg</div>";
-            }
-            
-            ?>
+          <a href="login.php">Logout</a>
+          <?php
+            include("logout.php");
+          ?>  
         </div>
+        <!-- for logout.php -->
 
-      </form>
-
+      </div>
     </div>
+    <?php
+      include("../includes/footer.php");
+    ?>
     <!--end of container class-->
 
     <!-- Optional JavaScript -->

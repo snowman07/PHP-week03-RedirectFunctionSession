@@ -1,4 +1,8 @@
 <?php
+  include("../includes/header.php");
+?>
+
+<?php
 
 include("/home/adomingo4/data/login-data-simpleblog.php"); // directory for htaccess. /home/adomingo4 - is the root folder "/"
 // this is for increased security
@@ -68,49 +72,62 @@ include("/home/adomingo4/data/login-data-simpleblog.php"); // directory for htac
       form {
         max-width: 450px;
       }
+      .border {
+        margin: 20px 250px 10px 250px;
+        /* border: 10px solid red; */
+      }
+      .container {
+        padding: 30px;
+        margin: 0 200px 0 200px;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 60px;
+        color: blue;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>LOGIN</h1>
-      <form name="myform" method="post" action="login.php">
-        <div class="form-group">
-          <label for="username">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            placeholder="Enter username here"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            placeholder="Enter password here"
-          />
-        </div>
-    
-        <button type="submit" name="mysubmit" class="btn btn-primary mb-2">
-          Submit
-        </button>
-
-
-        <p>&nbsp;</p>
-        <div>
-            <?php
-            
-            if($msg) {
-              echo "\n<div class=\"alert alert-primary\">$msg</div>";
-            }
-            
-            ?>
-        </div>
-
-      </form>
+    <h2>LOGIN</h2>
+    <div class="border border-primary rounded">
+      <div class="container">
+        <form name="myform" method="post" action="login.php">
+          <div class="form-group">
+            <label for="username">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              placeholder="Enter username here"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              placeholder="Enter password here"
+            />
+          </div>
+      
+          <button type="submit" name="mysubmit" class="btn btn-primary mb-2">
+            Login
+          </button>
+          <p>&nbsp;</p>
+          <div>
+              <?php
+                if($msg) {
+                  echo "\n<div class=\"alert alert-primary\">$msg</div>";
+                }
+              ?>
+          </div>
+        </form>
+      </div>
     </div>
+    <?php
+      include("../includes/footer.php");
+    ?>
     <!--end of container class-->
 
     <!-- Optional JavaScript -->

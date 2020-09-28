@@ -1,10 +1,6 @@
-
 <?php
-
   include("includes/header.php");
-
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -17,36 +13,51 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <style type="text/css">
-        .new-entry {
-            border: 1px solid #999;
-            margin: 10px;
-        }
-        .title {
-            font-weight: bold;
-        }
-        .timedate {
-            font-style: italic;
-
-        }
-        .entry {
-
-        }
+      .new-entry {
+          border: 3px solid #999;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          background-color: yellow;
+      }
+      .title {
+          font-weight: bold;
+          text-transform: uppercase;
+      }
+      .timedate {
+          font-style: italic;
+      }
+      .entry {
+        padding-top: 25px;
+      }
+      .border {
+        margin: 20px 250px 10px 250px
+      }
+      .container {
+        padding: 30px;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 60px;
+        color: blue;
+      }
     </style>
 
     <title>Simple Blog</title>
   </head>
   <body>
-    
-    <div class="container">
-      <!-- <h1>Simple Blog</h1> -->
-
-      <div><a href="admin/login.php">Insert New Entry</a></div>
-
-      <?php
-      include("admin/blogfile.txt");
-      
-      ?>
+    <h2>HOME</h2>
+    <div class="border border-primary rounded"> 
+      <div class="container">
+        <div><a href="admin/login.php">Insert New Entry</a></div>
+        <?php
+          include("admin/blogfile.txt");
+        ?>
+      </div>
     </div>
+
+    <?php
+      include("includes/footer.php");
+    ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
